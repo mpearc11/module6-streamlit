@@ -72,23 +72,34 @@ if st.button('read in clustal alignment file'):
 
     #code to upload AF3 files & process into a table
 
-    af3_file = st.file_uploader("",type='') #not sure what the AF3 file type will be yet
-    if af3_file is not None:
-        st.success("AF3 file uploaded")
+    af3_ps = st.file_uploader("",type='') #not sure what the AF3 file type will be yet
+    if af3_ps is not None:
+        st.success("project standard AF3 file uploaded")
     else:
-        st.info("please upload your AF3 .?? file")
+        st.info("please upload your project standard AF3 .?? file")
+
+    af3_target = st.file_uploader("",type='') #not sure what the AF3 file type will be yet
+    if af3_target is not None:
+        st.success("target AF3 file uploaded")
+    else:
+        st.info("please upload your target AF3 .?? file")
 
     @st.fragment()
     def frag():
-        if st.button('create AF3 dataframe & align with clustal'):
-            af3_df = pd.read_csv(af3_file)
-            st.write(af3_df)
+        if st.button('create AF3 dataframes & align with clustal'):
+            af3ps_df = pd.read_csv(af3_ps)
+            st.write(af3ps_df)
             #consurf_df = consurf_df[['SEQ','COLOR']]
             #consurf_df = consurf_df.iloc[1:].reset_index(drop=True)
             #st.write(consurf_df)
+
+            af3t_df = pd.read_csv(af3_target)
+            st.write(af3t_df)
                         
-            #df_combined = pd.concat([df_exploded, af3_df], axis=1)
-            #st.write(df_combined)
+            af3_df = pd.concat([af3ps_df, af3t_df], axis=1)
+            st.write(af3_df)
+            df_combined = pd.concat([df_exploded, af3_df], axis=1)
+            st.write(df_combined)
                         
 #not sure how much of the below code i will use; will need to create a new column for delta pLDDT & do some math to fill it for specific positions; will want to print target positions that match ps positions and will use ps positions for the if statement indexing for where to create delta values
             for idx, aa in enumerate(df_exploded['Project Standard Seq']):
