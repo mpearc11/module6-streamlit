@@ -1,5 +1,4 @@
 import streamlit as st
-from Bio import Blast
 from Bio import Align
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
