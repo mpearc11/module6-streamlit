@@ -13,7 +13,7 @@ from pandas import DataFrame
 
 st.title('FoldScore Calculation')
 
-st.header('Submit AlphaFold3 *file*')
+st.header('Submit Clustal Alignment')
     
 #code to upload clustal file & turn into dataframe
 
@@ -23,11 +23,15 @@ if psa_file is not None:
 else:
     st.info("please upload your clustal .clustal file")
 
+st.header('Submit Project Standard AlphaFold3 cif File')
+
 af3_ps = st.file_uploader("",type='cif', key=2)
 if af3_ps is not None:
     st.success("project standard AF3 file uploaded")
 else:
     st.info("please upload your project standard AF3 .cif file")
+
+st.header('Submit Target AlphaFold3 cif File')
 
 af3_target = st.file_uploader("",type='cif', key=3)
 if af3_target is not None:
@@ -83,11 +87,11 @@ if st.button('read in clustal alignment file'):
 
     #process AF3 cif files into a table
 
-    pLDDT_ps = ''
-    pLDDT_target = ''
     @st.fragment()
     def frag():
         if st.button('create AF3 dataframes & align with clustal'):
+            pLDDT_ps = ''
+            pLDDT_target = ''
             temp = af3_ps.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
             temp_split = temp.splitlines()
             for line in temp_split:
