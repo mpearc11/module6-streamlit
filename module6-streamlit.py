@@ -100,10 +100,10 @@ if st.button('read in clustal alignment file'):
                     pLDDT_ps += [pLDDT_line]
             st.write(pLDDT_ps)
             #turn list from parsed cif file into dataframe
-            af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atoms'])
+            af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
             st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
-            af3ps_df[['atom','a#','type','type2','.','resn','A','#','pos','?','1','2','3','4','pLDDT','pos2','A2']] = af3ps_df['atoms'].str.split('\t',expand=True)
+            af3ps_df[['atom','a#','type','type2','.','resn','A','#','pos','?','1','2','3','4','pLDDT','pos2','A2','1b']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             #df_exploded = df.explode('Values')
             st.write(af3ps_df['resn','pos','pLDDT'])
 
