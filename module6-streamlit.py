@@ -118,7 +118,7 @@ if st.button('read in clustal alignment file'):
             #make a list w numbers for 1 through number of residues
             st.write('last residue position')
             st.write(af3ps_df.iloc[-1,9])
-            num_resi = list(range(1,int(af3ps_df.iloc[-1,89)))
+            num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
             st.write(len(num_resi))
             '''
             for i in 
