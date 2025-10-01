@@ -23,7 +23,7 @@ if psa_file is not None:
 else:
     st.info("please upload your clustal .clustal file")
 
- af3_ps = st.file_uploader("",type='cif')
+af3_ps = st.file_uploader("",type='cif')
 if af3_ps is not None:
     st.success("project standard AF3 file uploaded")
 else:
