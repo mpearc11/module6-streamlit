@@ -87,14 +87,22 @@ if st.button('read in clustal alignment file'):
     @st.fragment()
     def frag():
         if st.button('create AF3 dataframes & align with clustal'):
-            af3ps_df = pd.read_csv(af3_ps)
-            st.write(af3ps_df)
+            temp = af3_ps.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+            temp_split = temp.splitlines()
+            for line in temp_split:
+                if line.startswith('ATOM'):
+                    pLDDT_line = line
+                    pLDDT_ps += pLDDT_line
+            st.write(pLDDT_ps)
+            #turn parsed cif file into dataframe somehow
+            #af3ps_df = pd.read_csv(af3_ps)
+            #st.write(af3ps_df)
             #consurf_df = consurf_df[['SEQ','COLOR']]
             #consurf_df = consurf_df.iloc[1:].reset_index(drop=True)
             #st.write(consurf_df)
 
-            af3t_df = pd.read_csv(af3_target)
-            st.write(af3t_df)
+            #af3t_df = pd.read_csv(af3_target)
+            #st.write(af3t_df)
                         
             #af3_df = pd.concat([af3ps_df, af3t_df], axis=1)
             #st.write(af3_df)
