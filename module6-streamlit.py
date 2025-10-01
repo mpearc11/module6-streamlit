@@ -42,7 +42,10 @@ else:
 
 #bytes = psa_file.getvalue() ##adds 'b in front of file & other character issues (adds /n etc)
 #st.write(bytes)
-temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+try:
+    temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+except AttributeError:
+    pass
 #st.text(temp)
 
 #declaring variables outside of button if statement so i can access them after the button step
@@ -146,9 +149,10 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
-            residue_df['resn'] = [resn]
-            residue_df['position'] = [num_resi]
-            residue_df['pLDDT'] = [pLDDT_averages]
+            data = {'Residue': [resn],
+                    'Position': [num_resi],
+                    'pLDDT': [pLDDT_averages]}
+            residue_df = pd.DataFrame(data)
             st.write(residue_df)
                     
                     
