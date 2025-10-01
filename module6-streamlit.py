@@ -131,7 +131,7 @@ if st.button('read in clustal alignment file'):
                 #if int(af3ps_df.loc['pos']) == i:
                     #st.write(af3ps_df.iloc[idx,6])
                     #resn.append(af3ps_df.iloc[idx,6])
-                for idx, row in af3ps_df.iterrows:
+                for idx, row in af3ps_df.iterrows():
                     if int(af3ps_df.iloc[idx,9]) == i:
                         st.write(idx)
                         st.write(af3ps_df.iloc[idx,15])
