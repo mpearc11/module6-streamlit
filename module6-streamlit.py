@@ -17,19 +17,19 @@ st.header('Submit AlphaFold3 *file*')
     
 #code to upload clustal file & turn into dataframe
 
-psa_file = st.file_uploader("",type='clustal_num')
+psa_file = st.file_uploader("",type='clustal_num', key=1)
 if psa_file is not None:
     st.success("PSA file uploaded")
 else:
     st.info("please upload your clustal .clustal file")
 
-af3_ps = st.file_uploader("",type='cif')
+af3_ps = st.file_uploader("",type='cif', key=2)
 if af3_ps is not None:
     st.success("project standard AF3 file uploaded")
 else:
     st.info("please upload your project standard AF3 .cif file")
 
-af3_target = st.file_uploader("",type='cif')
+af3_target = st.file_uploader("",type='cif', key=3)
 if af3_target is not None:
     st.success("target AF3 file uploaded")
 else:
