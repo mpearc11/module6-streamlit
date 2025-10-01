@@ -103,7 +103,7 @@ if st.button('read in clustal alignment file'):
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atoms'])
             st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
-            af3ps_df[['atom','a#','type','type2','.','resn','A','#','pos','?','1','2','3','4','pLDDT','pos2','A2','1b']] = af3ps_df['atoms'].str.split('\t',expand=True)
+            af3ps_df[['atom','a#','type','type2','.','resn','A','#','pos','?','1','2','3','4','pLDDT','pos2','A2']] = af3ps_df['atoms'].str.split('\t',expand=True)
             #df_exploded = df.explode('Values')
             st.write(af3ps_df['resn','pos','pLDDT'])
 
