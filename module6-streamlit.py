@@ -115,19 +115,23 @@ if st.button('read in clustal alignment file'):
 
             residue_df = ''
             temp_list = []
+            pLDDT_averages = []
             #make a list w numbers for 1 through number of residues
             st.write('last residue position')
             st.write(af3ps_df.iloc[-1,9])
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
             st.write(len(num_resi))
-            '''
-            for i in 
-            for idx, i in enumerate(af3ps_df):
-                #pLDDTs = np.where(af3ps_df.iloc[idx,8]
-                temp_list = [af3ps_df[idx,14]]
-                if af3ps_df[idx+1,8] == af3ps_df[idx,8]:
-                    temp_list += af3ps_df[idx+1,14]
-                    '''
+    
+            for i in num_resi:
+                for idx, row in enumerate(af3ps_df):
+                    if af3ps_df.iloc[idx,9] == i:
+                        temp_list += af3ps_df.iloc[idx,15]
+                        st.write(temp_list)
+                    avg = np.mean(temp_list)
+                    st.write(avg)
+                    pLDDT_averages += avg
+                    st.write(pLDDT_averages)
+                    
                     
 
             #consurf_df = consurf_df[['SEQ','COLOR']]
