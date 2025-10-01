@@ -149,14 +149,16 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
-            data = {'Residue': [resn],
-                    'Position': [num_resi],
-                    'pLDDT': [pLDDT_averages]}
-            df = pd.DataFrame(data)
-            df1 = df['Residue'].str.split('').explode().reset_index(drop=True)
-            df2 = df['Position'].str.split('').explode().reset_index(drop=True)
-            df3 = df['pLDDT'].str.split('').explode().reset_index(drop=True)
-            residue_df = pd.concat([df1, df2, df3], axis=1)
+            data = {'Residue': resn,
+                    'Position': num_resi,
+                    'pLDDT': pLDDT_averages}
+            residue_df = pd.DataFrame(data)
+            #df1 = df['Residue'].str.split('').explode().reset_index(drop=True)
+            #df1 = pd.DataFrame(resn, columns=['Residue'])
+            #st.write(df1)
+            #df2 = df['Position'].str.split('').explode().reset_index(drop=True)
+            #df3 = df['pLDDT'].str.split('').explode().reset_index(drop=True)
+            #residue_df = pd.concat([df1, df2, df3], axis=1)
             st.write(residue_df)
                     
                     
