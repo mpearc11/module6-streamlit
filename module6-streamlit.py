@@ -100,12 +100,12 @@ if st.button('read in clustal alignment file'):
                     pLDDT_ps += [pLDDT_line]
             #st.write(pLDDT_ps)
             for idx, item in enumerate(pLDDT_ps):
-                split = item.split(' ')
-                for item in split:
-                    st.write(idx)
-                    st.write(item)
-                st.write(len(split))
-                break
+                while idx <20:
+                    split = item.split(' ')
+                    #for item in split:
+                        #st.write(idx)
+                        #st.write(item)
+                    st.write(len(split))
             #turn list from parsed cif file into dataframe
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
             st.write(af3ps_df)
