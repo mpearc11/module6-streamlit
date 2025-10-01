@@ -99,10 +99,10 @@ if st.button('read in clustal alignment file'):
                     pLDDT_line = line
                     pLDDT_ps += [pLDDT_line]
             st.write(pLDDT_ps)
-            for item in pLDDT_ps:
+            for idx, item in enumerate(pLDDT_ps):
                 split = item.split(' ')
                 for item in split:
-                    st.write(index(item))
+                    st.write(idx)
                     st.write(item)
                 st.write(len(split))
                 break
