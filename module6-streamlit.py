@@ -102,6 +102,7 @@ if st.button('read in clustal alignment file'):
             for item in pLDDT_ps:
                 split = item.split(' ')
                 for item in split:
+                    st.write(index(item))
                     st.write(item)
                 st.write(len(split))
                 break
