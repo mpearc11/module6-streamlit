@@ -136,9 +136,9 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
-            data = {'Residue': resn,
-                    'Position': num_resi,
-                    'pLDDT': pLDDT_averages}
+            data = {'Project Standard Residue': resn,
+                    'Project Standard Position': num_resi,
+                    'Project Standard pLDDT': pLDDT_averages}
             psresidue_df = pd.DataFrame(data)
             st.write(psresidue_df)
                     
@@ -181,9 +181,9 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
-            data = {'Residue': resn,
-                    'Position': num_resi,
-                    'pLDDT': pLDDT_averages}
+            data = {'Target Residue': resn,
+                    'Target Position': num_resi,
+                    'Target pLDDT': pLDDT_averages}
             tresidue_df = pd.DataFrame(data)
             st.write(tresidue_df)
             
