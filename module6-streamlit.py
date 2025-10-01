@@ -96,6 +96,8 @@ if st.button('read in clustal alignment file'):
         if st.button('create AF3 dataframes & align with clustal'):
             pLDDT_ps = []
             pLDDT_target = []
+
+            #project standard cif parsing
             temp = af3_ps.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
             temp_split = temp.splitlines()
             for line in temp_split:
@@ -103,37 +105,23 @@ if st.button('read in clustal alignment file'):
                     pLDDT_line = re.sub(r'\s+', ' ', line)
                     pLDDT_ps += [pLDDT_line]
             #st.write(pLDDT_ps)
-            #for idx, item in enumerate(pLDDT_ps):
-                #split = item.split(' ')
-                #for item in split:
-                    #st.write(idx)
-                    #st.write(item)
-                #st.write(len(split))
             #turn list from parsed cif file into dataframe
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
             st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
             af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             st.write(af3ps_df[['resn','pos','pLDDT']])
-            st.write(af3ps_df.shape)
-
-            residue_df = ''
+            
+            psresidue_df = ''
             temp_list = []
             pLDDT_averages = []
             resn = []
             position = ''
             #make a list w numbers for 1 through number of residues
-            #st.write('last residue position')
-            #st.write(af3ps_df.iloc[-1,9])
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
-            #st.write(len(num_resi))
     
             for i in num_resi:
                 temp_list = []
-                #st.write('position = ' + str(i))
-                #if int(af3ps_df.loc['pos']) == i:
-                    #st.write(af3ps_df.iloc[idx,6])
-                    #resn.append(af3ps_df.iloc[idx,6])
                 for idx, row in af3ps_df.iterrows():
                     if int(af3ps_df.iloc[idx,9]) == i:
                         #st.write(idx)
@@ -145,33 +133,63 @@ if st.button('read in clustal alignment file'):
                         if pos_temp != af3ps_df.iloc[idx-1,9]:
                             resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
-                #st.write(avg)
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
             data = {'Residue': resn,
                     'Position': num_resi,
                     'pLDDT': pLDDT_averages}
-            residue_df = pd.DataFrame(data)
-            #df1 = df['Residue'].str.split('').explode().reset_index(drop=True)
-            #df1 = pd.DataFrame(resn, columns=['Residue'])
-            #st.write(df1)
-            #df2 = df['Position'].str.split('').explode().reset_index(drop=True)
-            #df3 = df['pLDDT'].str.split('').explode().reset_index(drop=True)
-            #residue_df = pd.concat([df1, df2, df3], axis=1)
-            st.write(residue_df)
+            psresidue_df = pd.DataFrame(data)
+            st.write(psresidue_df)
                     
-                    
-
-            #consurf_df = consurf_df[['SEQ','COLOR']]
-            #consurf_df = consurf_df.iloc[1:].reset_index(drop=True)
-            #st.write(consurf_df)
-
-            #af3t_df = pd.read_csv(af3_target)
-            #st.write(af3t_df)
+            #target cif parsing
+            temp = af3_target.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+            temp_split = temp.splitlines()
+            for line in temp_split:
+                if line.startswith('ATOM'):
+                    pLDDT_line = re.sub(r'\s+', ' ', line)
+                    pLDDT_target += [pLDDT_line]
+            #st.write(pLDDT_target)
+            #turn list from parsed cif file into dataframe
+            af3t_df = pd.DataFrame(pLDDT_target, columns=['atom'])
+            st.write(af3t_df)
+            #explode dataframe into multiple columns to isolate pLDDT scores
+            af3t_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3t_df['atom'].str.split(' ',expand=True) #\t for tab delimited
+            st.write(af3t_df[['resn','pos','pLDDT']])
+            
+            tresidue_df = ''
+            temp_list = []
+            pLDDT_averages = []
+            resn = []
+            position = ''
+            #make a list w numbers for 1 through number of residues
+            num_resi = list(range(1,int(af3t_df.iloc[-1,9])))
+    
+            for i in num_resi:
+                temp_list = []
+                for idx, row in af3t_df.iterrows():
+                    if int(af3t_df.iloc[idx,9]) == i:
+                        #st.write(idx)
+                        #st.write(af3t_df.iloc[idx,15])
+                        temp_list.append(float(af3t_df.iloc[idx,15]))
+                        #st.write(temp_list)
+                        pos_temp = af3t_df.iloc[idx,9]
+                        #st.write(af3t_df.iloc[idx,6])
+                        if pos_temp != af3t_df.iloc[idx-1,9]:
+                            resn.append(af3t_df.iloc[idx,6])
+                avg = np.mean(temp_list)
+                pLDDT_averages.append(avg)
+            st.write(pLDDT_averages)
+            st.write(resn)
+            data = {'Residue': resn,
+                    'Position': num_resi,
+                    'pLDDT': pLDDT_averages}
+            tresidue_df = pd.DataFrame(data)
+            st.write(tresidue_df)
+            
                         
-            #af3_df = pd.concat([af3ps_df, af3t_df], axis=1)
-            #st.write(af3_df)
+            af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
+            st.write(af3_df)
             #df_combined = pd.concat([df_exploded, af3_df], axis=1)
             #st.write(df_combined)
                         
