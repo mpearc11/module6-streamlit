@@ -127,18 +127,18 @@ if st.button('read in clustal alignment file'):
     
             for i in num_resi:
                 temp_list = []
-                st.write('position = ' + str(i))
+                #st.write('position = ' + str(i))
                 #if int(af3ps_df.loc['pos']) == i:
                     #st.write(af3ps_df.iloc[idx,6])
                     #resn.append(af3ps_df.iloc[idx,6])
                 for idx, row in af3ps_df.iterrows():
                     if int(af3ps_df.iloc[idx,9]) == i:
-                        st.write(idx)
-                        st.write(af3ps_df.iloc[idx,15])
+                        #st.write(idx)
+                        #st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
-                        st.write(temp_list)
+                        #st.write(temp_list)
                         pos_temp = af3ps_df.iloc[idx,6]
-                        st.write(af3ps_df.iloc[idx,6])
+                        #st.write(af3ps_df.iloc[idx,6])
                         if pos_temp != af3ps_df.iloc[idx-1,6]:
                             resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
