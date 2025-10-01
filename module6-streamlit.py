@@ -100,8 +100,8 @@ if st.button('read in clustal alignment file'):
                     pLDDT_ps += [pLDDT_line]
             st.write(pLDDT_ps)
             #turn parsed cif file into dataframe somehow
-            #af3ps_df = pd.read_csv(af3_ps)
-            #st.write(af3ps_df)
+            af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atoms'])
+            st.write(af3ps_df)
             #consurf_df = consurf_df[['SEQ','COLOR']]
             #consurf_df = consurf_df.iloc[1:].reset_index(drop=True)
             #st.write(consurf_df)
