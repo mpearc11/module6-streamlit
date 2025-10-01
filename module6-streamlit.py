@@ -117,16 +117,16 @@ if st.button('read in clustal alignment file'):
             temp_list = []
             pLDDT_averages = []
             #make a list w numbers for 1 through number of residues
-            st.write('last residue position')
-            st.write(af3ps_df.iloc[-1,9])
+            #st.write('last residue position')
+            #st.write(af3ps_df.iloc[-1,9])
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
-            st.write(len(num_resi))
+            #st.write(len(num_resi))
     
             for i in num_resi:
                 st.write(i)
                 for idx, row in enumerate(af3ps_df):
                     st.write(af3ps_df.iloc[idx,9])
-                    if af3ps_df.iloc[idx,9] == i:
+                    if af3ps_df.iloc[idx,9] == str(i):
                         st.write('true')
                         temp_list = temp_list.append(af3ps_df.iloc[idx,15])
                         st.write(temp_list)
