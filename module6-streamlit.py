@@ -111,7 +111,7 @@ if st.button('read in clustal alignment file'):
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
             st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
-            af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
+            af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             st.write(af3ps_df[['resn','pos','pLDDT']])
 
             #consurf_df = consurf_df[['SEQ','COLOR']]
