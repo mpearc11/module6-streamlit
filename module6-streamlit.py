@@ -133,9 +133,9 @@ if st.button('read in clustal alignment file'):
                 for idx, row in enumerate(af3ps_df):
                     if int(af3ps_df.iloc[idx,9]) == i:
                         st.write(idx)
-                        if idx = 19:
+                        if idx == 19:
                             st.write('19 okay')
-                        if idx = 20:
+                        if idx == 20:
                             st.write('20 okay')
                         st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
