@@ -117,6 +117,7 @@ if st.button('read in clustal alignment file'):
             temp_list = []
             pLDDT_averages = []
             resn = []
+            position = ''
             #make a list w numbers for 1 through number of residues
             #st.write('last residue position')
             #st.write(af3ps_df.iloc[-1,9])
@@ -135,10 +136,10 @@ if st.button('read in clustal alignment file'):
                         st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
                         st.write(temp_list)
-                        #st.write(type(temp_list))
-                st.write(idx)
-                st.write(af3ps_df.iloc[idx,6])
-                resn.append(af3ps_df.iloc[idx,6])
+                        pos_temp = af3ps_df.iloc[idx,6]
+                        st.write(af3ps_df.iloc[idx,6])
+                        if pos_temp != af3ps_df.iloc[idx-1,6]:
+                            resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
                 #st.write(avg)
                 pLDDT_averages.append(avg)
