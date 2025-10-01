@@ -100,7 +100,6 @@ if st.button('read in clustal alignment file'):
                     pLDDT_line = re.sub(r'\s+', ' ', line)
                     pLDDT_ps += [pLDDT_line]
             #st.write(pLDDT_ps)
-            #cleaned_pLDDTps = re.sub(r'\s+', ' ', pLDDT_ps)
             #for idx, item in enumerate(pLDDT_ps):
                 #split = item.split(' ')
                 #for item in split:
@@ -113,6 +112,21 @@ if st.button('read in clustal alignment file'):
             #explode dataframe into multiple columns to isolate pLDDT scores
             af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             st.write(af3ps_df[['resn','pos','pLDDT']])
+
+            residue_df = ''
+            temp_list = []
+            #make a list w numbers for 1 through number of residues
+            num_resi = [1:af3ps_df.iloc[-1,8]
+            st.write(len(num_resi))
+            '''
+            for i in 
+            for idx, i in enumerate(af3ps_df):
+                #pLDDTs = np.where(af3ps_df.iloc[idx,8]
+                temp_list = [af3ps_df[idx,14]]
+                if af3ps_df[idx+1,8] == af3ps_df[idx,8]:
+                    temp_list += af3ps_df[idx+1,14]
+                    '''
+                    
 
             #consurf_df = consurf_df[['SEQ','COLOR']]
             #consurf_df = consurf_df.iloc[1:].reset_index(drop=True)
