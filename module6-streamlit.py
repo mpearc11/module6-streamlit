@@ -125,7 +125,7 @@ if st.button('read in clustal alignment file'):
     
             for idx, i in enumerate(num_resi):
                 temp_list = []
-                if af3ps_df.iloc[idx,9] == i:
+                if int(af3ps_df.iloc[idx,9]) == i:
                     st.write(af3ps_df.iloc[idx,6])
                     resn.append(af3ps_df.iloc[idx,6])
                 for idx, row in enumerate(af3ps_df):
