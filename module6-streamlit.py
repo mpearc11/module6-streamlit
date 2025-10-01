@@ -98,7 +98,7 @@ if st.button('read in clustal alignment file'):
                 if line.startswith('ATOM'):
                     pLDDT_line = line
                     pLDDT_ps += [pLDDT_line]
-            st.write(pLDDT_ps)
+            #st.write(pLDDT_ps)
             for idx, item in enumerate(pLDDT_ps):
                 split = item.split(' ')
                 for item in split:
@@ -110,7 +110,7 @@ if st.button('read in clustal alignment file'):
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
             st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
-            af3ps_df[['atom','a#','type','type2','.','resn','A','#','pos','?','1','2','3','4','pLDDT','pos2','A2','1b']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
+            af3ps_df[['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','resn','17','18','pos','20','21','22','23','24','25','26','27','28','pLDDT','30','31','32','33','34']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             #df_exploded = df.explode('Values')
             st.write(af3ps_df['resn','pos','pLDDT'])
 
