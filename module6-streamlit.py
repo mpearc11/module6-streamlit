@@ -103,6 +103,7 @@ if st.button('read in clustal alignment file'):
                 split = item.split(' ')
                 for item in split:
                     st.write(item)
+                st.write(len(split))
                 break
             #turn list from parsed cif file into dataframe
             af3ps_df = pd.DataFrame(pLDDT_ps, columns=['atom'])
