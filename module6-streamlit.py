@@ -130,13 +130,13 @@ if st.button('read in clustal alignment file'):
                         temp_list.append(af3ps_df.iloc[idx,15])
                         st.write(temp_list)
                         st.write(type(temp_list))
-                    #avg = np.mean(temp_list)
-                    sum = np.sum(temp_list)
-                    st.write(sum)
-                    avg = sum/len(temp_list)
-                    st.write(avg)
-                    pLDDT_averages = pLDDT_averages.append(avg)
-                    st.write(pLDDT_averages)
+                #avg = np.mean(temp_list)
+                sum = np.sum(temp_list)
+                st.write(sum)
+                avg = sum/len(temp_list)
+                st.write(avg)
+                pLDDT_averages = pLDDT_averages.append(avg)
+                st.write(pLDDT_averages)
                     
                     
 
