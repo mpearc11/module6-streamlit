@@ -23,6 +23,18 @@ if psa_file is not None:
 else:
     st.info("please upload your clustal .clustal file")
 
+ af3_ps = st.file_uploader("",type='cif')
+if af3_ps is not None:
+    st.success("project standard AF3 file uploaded")
+else:
+    st.info("please upload your project standard AF3 .cif file")
+
+af3_target = st.file_uploader("",type='cif')
+if af3_target is not None:
+    st.success("target AF3 file uploaded")
+else:
+    st.info("please upload your target AF3 .cif file")
+
 #bytes = psa_file.getvalue() ##adds 'b in front of file & other character issues (adds /n etc)
 #st.write(bytes)
 temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
@@ -69,19 +81,7 @@ if st.button('read in clustal alignment file'):
     #df_exploded = df_exploded.iloc[1:].reset_index(drop=True) #moving this to after the conservation symbols are added
     #st.write(df_exploded)
 
-    #code to upload AF3 files & process into a table
-
-    af3_ps = st.file_uploader("",type='cif')
-    if af3_ps is not None:
-        st.success("project standard AF3 file uploaded")
-    else:
-        st.info("please upload your project standard AF3 .cif file")
-
-    af3_target = st.file_uploader("",type='cif')
-    if af3_target is not None:
-        st.success("target AF3 file uploaded")
-    else:
-        st.info("please upload your target AF3 .cif file")
+    #process AF3 cif files into a table
 
     @st.fragment()
     def frag():
