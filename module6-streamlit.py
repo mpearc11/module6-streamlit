@@ -10,6 +10,7 @@ import tempfile
 import os
 import numpy as np
 from pandas import DataFrame
+import re
 
 st.title('FoldScore Calculation')
 
