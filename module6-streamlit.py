@@ -123,17 +123,18 @@ if st.button('read in clustal alignment file'):
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
             #st.write(len(num_resi))
     
-            for idx, i in enumerate(num_resi):
+            for i in num_resi:
                 temp_list = []
-                if int(af3ps_df.iloc[idx,9]) == i:
-                    st.write(af3ps_df.iloc[idx,6])
-                    resn.append(af3ps_df.iloc[idx,6])
+                #if int(af3ps_df.loc['pos']) == i:
+                    #st.write(af3ps_df.iloc[idx,6])
+                    #resn.append(af3ps_df.iloc[idx,6])
                 for idx, row in enumerate(af3ps_df):
                     if int(af3ps_df.iloc[idx,9]) == i:
                         #st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
                         #st.write(temp_list)
                         #st.write(type(temp_list))
+                resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
                 #st.write(avg)
                 pLDDT_averages.append(avg)
