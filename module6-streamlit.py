@@ -83,6 +83,8 @@ if st.button('read in clustal alignment file'):
 
     #process AF3 cif files into a table
 
+    pLDDT_ps = ''
+    pLDDT_target = ''
     @st.fragment()
     def frag():
         if st.button('create AF3 dataframes & align with clustal'):
