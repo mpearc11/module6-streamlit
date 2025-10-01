@@ -112,6 +112,7 @@ if st.button('read in clustal alignment file'):
             #explode dataframe into multiple columns to isolate pLDDT scores
             af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
             st.write(af3ps_df[['resn','pos','pLDDT']])
+            st.write(af3ps_df.shape)
 
             residue_df = ''
             temp_list = []
@@ -131,12 +132,10 @@ if st.button('read in clustal alignment file'):
                     #st.write(af3ps_df.iloc[idx,6])
                     #resn.append(af3ps_df.iloc[idx,6])
                 for idx, row in enumerate(af3ps_df):
+                    if idx == 20:
+                        st.write('20 okay')
                     if int(af3ps_df.iloc[idx,9]) == i:
                         st.write(idx)
-                        if idx == 19:
-                            st.write('19 okay')
-                        if idx == 20:
-                            st.write('20 okay')
                         st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
                         st.write(temp_list)
