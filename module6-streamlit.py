@@ -90,14 +90,14 @@ if st.button('read in clustal alignment file'):
     @st.fragment()
     def frag():
         if st.button('create AF3 dataframes & align with clustal'):
-            pLDDT_ps = ''
-            pLDDT_target = ''
+            pLDDT_ps = []
+            pLDDT_target = []
             temp = af3_ps.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
             temp_split = temp.splitlines()
             for line in temp_split:
                 if line.startswith('ATOM'):
                     pLDDT_line = line
-                    pLDDT_ps += pLDDT_line
+                    pLDDT_ps += [pLDDT_line]
             st.write(pLDDT_ps)
             #turn parsed cif file into dataframe somehow
             #af3ps_df = pd.read_csv(af3_ps)
