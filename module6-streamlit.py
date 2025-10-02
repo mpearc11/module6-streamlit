@@ -122,41 +122,35 @@ if st.button('read in clustal alignment file'):
 
 
            # Pre-extract the necessary columns for faster access
-            pos_col = af3ps_df.iloc[:, 9].values
-            resn_col = af3ps_df.iloc[:, 6].values
-            value_col = af3ps_df.iloc[:, 15].values
+            pos_col = af3ps_df.iloc[:, 9].values  # Position column (9th column)
+            resn_col = af3ps_df.iloc[:, 6].values  # Residue name column (6th column)
+            value_col = af3ps_df.iloc[:, 15].values  # pLDDT value column (15th column)
             
             # Initialize lists for results
             pLDDT_averages = []
             resn = []
             
-            # Iterate over each unique `num_resi` in num_resi
+            # Iterate over each unique `num_resi`
             for i in num_resi:
-                # Mask to filter rows where the position matches the current `i`
-                mask = pos_col == i
+                temp_list = []
                 
-                # If the mask is empty, skip to the next iteration (no values for this i)
-                if not np.any(mask):
-                    continue
-                
-                # Extract the filtered values for `value_col` and calculate the average
-                filtered_values = value_col[mask]
-                avg = np.mean(filtered_values)
+                # Iterate over DataFrame rows (similar to original structure)
+                for idx, row in af3ps_df.iterrows():
+                    # Check if the position matches the current `i`
+                    if pos_col[idx] == i:
+                        temp_list.append(value_col[idx])  # Append the pLDDT value
+                        
+                        # Track changes in position (we compare the current and previous row)
+                        if idx > 0 and pos_col[idx] != pos_col[idx - 1]:
+                            resn.append(resn_col[idx])  # Append residue name when position changes
+            
+                # Compute the average of pLDDT values for this residue
+                avg = np.mean(temp_list)
                 pLDDT_averages.append(avg)
-                
-                # Extract the filtered `resn` values
-                filtered_resn = resn_col[mask]
-                
-                # Track changes in position (we only need to compare the consecutive ones)
-                pos_changes = np.diff(pos_col[mask]) != 0  # Detect position changes
-                
-                # Append the first residue name (because it doesn't have a previous position to compare)
-                resn.append(filtered_resn[0])
-                
-                # Append the resn values at position change points (starting from index 1)
-                for idx in range(1, len(pos_changes)):
-                    if pos_changes[idx-1]:  # Position change detected
-                        resn.append(filtered_resn[idx])
+            
+                # Append the first residue name (for the initial residue matching the `i` value)
+                if temp_list:
+                    resn.append(resn_col[temp_list.index(value_col[0])])
 
             '''
             for i in num_resi:
