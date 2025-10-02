@@ -87,7 +87,7 @@ if st.button('read in clustal alignment file'):
     #st.write(df_exploded)
     #df_exploded['color'] = 0
     df_exploded = df_exploded.iloc[1:].reset_index(drop=True) #moving this to after the conservation symbols are added
-    st.write(df_exploded)
+    #st.write(df_exploded)
 
     #process AF3 cif files into a table
 
@@ -110,7 +110,7 @@ if st.button('read in clustal alignment file'):
             #st.write(af3ps_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
             af3ps_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3ps_df['atom'].str.split(' ',expand=True) #\t for tab delimited
-            st.write(af3ps_df[['resn','pos','pLDDT']])
+            #st.write(af3ps_df[['resn','pos','pLDDT']])
             
             psresidue_df = ''
             temp_list = []
@@ -160,7 +160,7 @@ if st.button('read in clustal alignment file'):
             #st.write(af3t_df)
             #explode dataframe into multiple columns to isolate pLDDT scores
             af3t_df[['0','1','2','3','4','resn','6','7','pos','9','10','11','12','13','pLDDT','15','16','17','18']] = af3t_df['atom'].str.split(' ',expand=True) #\t for tab delimited
-            st.write(af3t_df[['resn','pos','pLDDT']])
+            #st.write(af3t_df[['resn','pos','pLDDT']])
             
             tresidue_df = ''
             temp_list = []
@@ -196,16 +196,14 @@ if st.button('read in clustal alignment file'):
                     'Target pLDDT': pLDDT_averages}
             tresidue_df = pd.DataFrame(data)
             st.write(tresidue_df)
-            
-                        
+                                    
             #af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
             #st.write(af3_df)
             #df_combined = pd.concat([df_exploded, af3_df], axis=1)
             #st.write(df_combined)
-                        
-#not sure how much of the below code i will use; will need to create a new column for delta pLDDT & do some math to fill it for specific positions; will want to print target positions that match ps positions and will use ps positions for the if statement indexing for where to create delta values
-            #df_exploded = df_exploded.drop(index=0)
-            st.write(df_exploded)
+            
+            #add gaps to cif df and concat with clustal df            
+            #st.write(df_exploded)
             for idx, aa in enumerate(df_exploded['Project Standard Seq']):
                 #st.write(aa)
                 if aa == '-':
@@ -233,13 +231,13 @@ if st.button('read in clustal alignment file'):
             st.write(df_combined)
 
             #calculate delta pLDDT for specific residue positions
-            df_combined['Delta pLDDT'] = ''
+            df_combined['Delta pLDDT'] = 0
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
                 if i in (65,212,213,232,250,254,269,333):
                     dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
-                    df_combined.iloc[idx,8] = float(dpLDDT)
+                    df_combined.iloc[idx,8] = dpLDDT
             st.write(df_combined)
             st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
