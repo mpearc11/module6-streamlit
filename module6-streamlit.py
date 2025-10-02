@@ -188,8 +188,8 @@ if st.button('read in clustal alignment file'):
             st.write(tresidue_df)
             
                         
-            af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
-            st.write(af3_df)
+            #af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
+            #st.write(af3_df)
             #df_combined = pd.concat([df_exploded, af3_df], axis=1)
             #st.write(df_combined)
                         
@@ -202,16 +202,27 @@ if st.button('read in clustal alignment file'):
                     #st.write(gap)
                     #st.write(gap - 0.5)
                     #consurf_df.loc[gap] = ''
-                    line = DataFrame({"SEQ": '', "COLOR": 0}, index=[gap -0.5])
-                    consurf_df = pd.concat([consurf_df, line])
-                    consurf_df = consurf_df.sort_index().reset_index(drop=True)
+                    line = DataFrame({"Project Standard Residue": '', "Project Standard Position": '', "Project Standard pLDDT": 0}, index=[gap -0.5])
+                    psresidue_df = pd.concat([psresidue_df, line])
+                    psresidue_df = psresidue_df.sort_index().reset_index(drop=True)
+             for idx, aa in enumerate(df_exploded['Target Seq']):
+                #st.write(aa)
+                if aa == '-':
+                    #st.write(idx)
+                    gap = idx
+                    #st.write(gap)
+                    #st.write(gap - 0.5)
+                    #consurf_df.loc[gap] = ''
+                    line = DataFrame({"Target Residue": '', "Target Position": '', "Target pLDDT": 0}, index=[gap -0.5])
+                    tresidue_df = pd.concat([tresidue_df, line])
+                    tresidue_df = tresidue_df.sort_index().reset_index(drop=True)
             #st.write(consurf_df)
-            df_combined = pd.concat([df_exploded, consurf_df], axis=1)
-            df_combined = df_combined.iloc[:-1]
-            #st.write(df_combined)
+            df_combined = pd.concat([df_exploded, tresidue_df, psresidue_df], axis=1)
+            #df_combined = df_combined.iloc[:-1]
+            st.write(df_combined)
 
             #create new column (evoscore) and fill cells
-            df_combined['EvoScore'] = ''
+            df_combined['Delta pLDDT'] = ''
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['COLOR']):
