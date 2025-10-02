@@ -121,7 +121,7 @@ if st.button('read in clustal alignment file'):
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
 
 
-           # Pre-extract the necessary columns from the DataFrame for faster access
+           # Pre-extract the necessary columns for faster access
             pos_col = af3ps_df.iloc[:, 9].values
             resn_col = af3ps_df.iloc[:, 6].values
             value_col = af3ps_df.iloc[:, 15].values
@@ -135,6 +135,10 @@ if st.button('read in clustal alignment file'):
                 # Mask to filter rows where the position matches the current `i`
                 mask = pos_col == i
                 
+                # If the mask is empty, skip to the next iteration (no values for this i)
+                if not np.any(mask):
+                    continue
+                
                 # Extract the filtered values for `value_col` and calculate the average
                 filtered_values = value_col[mask]
                 avg = np.mean(filtered_values)
@@ -143,7 +147,7 @@ if st.button('read in clustal alignment file'):
                 # Extract the filtered `resn` values
                 filtered_resn = resn_col[mask]
                 
-                # Track changes in position
+                # Track changes in position (we only need to compare the consecutive ones)
                 pos_changes = np.diff(pos_col[mask]) != 0  # Detect position changes
                 
                 # Append the first residue name (because it doesn't have a previous position to compare)
@@ -153,7 +157,7 @@ if st.button('read in clustal alignment file'):
                 for idx in range(1, len(pos_changes)):
                     if pos_changes[idx-1]:  # Position change detected
                         resn.append(filtered_resn[idx])
- 
+
             '''
             for i in num_resi:
                 temp_list = []
