@@ -237,13 +237,13 @@ if st.button('read in clustal alignment file'):
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
-                if i == 65 or 212 or 213:
+                if i == 65:
                     dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
                     df_combined.iloc[idx,8] = dpLDDT
             st.write(df_combined)
             st.write(df_combined.dtypes)
-            #df_combined['EvoScore'] = df_combined['EvoScore'].astype(float)
-            #st.write(df_combined.dtypes)
+            df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
+            st.write(df_combined.dtypes)
             #evoscore = df_combined['EvoScore'].sum()
             #st.write('EvoScore = ' + str(evoscore))
             
