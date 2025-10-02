@@ -229,7 +229,7 @@ if st.button('read in clustal alignment file'):
                     tresidue_df = tresidue_df.sort_index().reset_index(drop=True)
             #st.write(consurf_df)
             df_combined = pd.concat([df_exploded, tresidue_df, psresidue_df], axis=1)
-            #df_combined = df_combined.iloc[:-1]
+            df_combined = df_combined.iloc[:-2]
             st.write(df_combined)
 
             #create new column (evoscore) and fill cells
