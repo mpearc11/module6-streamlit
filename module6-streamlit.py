@@ -84,7 +84,7 @@ if st.button('read in clustal alignment file'):
     df2 = df['Project Standard Seq'].str.split('').explode().reset_index(drop=True)
     #st.write(df2)
     df_exploded = pd.concat([df1, df2], axis=1)
-    #st.write(df_exploded)
+    st.write(df_exploded)
     #df_exploded['color'] = 0
     #df_exploded = df_exploded.iloc[1:].reset_index(drop=True) #moving this to after the conservation symbols are added
     #st.write(df_exploded)
@@ -121,6 +121,13 @@ if st.button('read in clustal alignment file'):
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
 
 
+            grouped = af3ps_df.groupby(af3ps_df.iloc[:, 9].astype(int))
+	        pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
+	        resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
+	        st.write(pLDDT_averages)
+	        st.write(resn)
+        
+            '''
             for i in num_resi:
                 temp_list = []
                 for idx, row in af3ps_df.iterrows():
@@ -133,6 +140,7 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
+            '''
             data = {'Project Standard Residue': resn,
                     'Project Standard Position': num_resi,
                     'Project Standard pLDDT': pLDDT_averages}
