@@ -121,8 +121,7 @@ if st.button('read in clustal alignment file'):
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
 
 
-            # Preextract columns for faster access
-            num_resi_set = set(num_resi)  # Convert to set for faster lookup
+           # Pre-extract the necessary columns from the DataFrame for faster access
             pos_col = af3ps_df.iloc[:, 9].values
             resn_col = af3ps_df.iloc[:, 6].values
             value_col = af3ps_df.iloc[:, 15].values
@@ -131,26 +130,30 @@ if st.button('read in clustal alignment file'):
             pLDDT_averages = []
             resn = []
             
-            # Iterate over unique num_resi values
-            for i in num_resi_set:
-                # Mask for rows where the condition holds
+            # Iterate over each unique `num_resi` in num_resi
+            for i in num_resi:
+                # Mask to filter rows where the position matches the current `i`
                 mask = pos_col == i
                 
-                # Extract the filtered values
+                # Extract the filtered values for `value_col` and calculate the average
                 filtered_values = value_col[mask]
-                temp_list = filtered_values.tolist()  # Convert to list if necessary
-            
-                # Calculate the average of filtered values
-                avg = np.mean(temp_list)
+                avg = np.mean(filtered_values)
                 pLDDT_averages.append(avg)
                 
-                # Find the corresponding resn values
+                # Extract the filtered `resn` values
                 filtered_resn = resn_col[mask]
                 
-                # Detect changes in the position (equivalent to your if condition)
-                pos_changes = np.diff(pos_col[mask]) != 0
-                resn.append(filtered_resn[pos_changes].tolist())  # Only append those positions where the value changes
-            
+                # Track changes in position
+                pos_changes = np.diff(pos_col[mask]) != 0  # Detect position changes
+                
+                # Append the first residue name (because it doesn't have a previous position to compare)
+                resn.append(filtered_resn[0])
+                
+                # Append the resn values at position change points (starting from index 1)
+                for idx in range(1, len(pos_changes)):
+                    if pos_changes[idx-1]:  # Position change detected
+                        resn.append(filtered_resn[idx])
+ 
             '''
             for i in num_resi:
                 temp_list = []
