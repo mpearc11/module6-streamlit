@@ -205,8 +205,7 @@ if st.button('read in clustal alignment file'):
                     line = DataFrame({"Project Standard Residue": '', "Project Standard Position": '', "Project Standard pLDDT": 0}, index=[gap -0.5])
                     psresidue_df = pd.concat([psresidue_df, line])
                     psresidue_df = psresidue_df.sort_index().reset_index(drop=True)
-             for idx, aa in enumerate(df_exploded['Target Seq']):
-                #st.write(aa)
+            for idx, aa in enumerate(df_exploded['Target Seq']):
                 if aa == '-':
                     #st.write(idx)
                     gap = idx
