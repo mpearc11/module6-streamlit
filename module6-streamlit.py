@@ -237,9 +237,9 @@ if st.button('read in clustal alignment file'):
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
-                if i == 65:
+                if i in (65,212,213,232,250,254,269,333):
                     dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
-                    df_combined.iloc[idx,8] = dpLDDT
+                    df_combined.iloc[idx,8] = float(dpLDDT)
             st.write(df_combined)
             st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
