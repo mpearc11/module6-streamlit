@@ -233,7 +233,7 @@ if st.button('read in clustal alignment file'):
             #calculate delta pLDDT for specific residue positions
             df_combined['Delta pLDDT'] = 0
             target_resi_list = []
-            target_position_list []
+            target_position_list = []
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
