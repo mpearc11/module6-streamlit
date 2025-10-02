@@ -169,7 +169,15 @@ if st.button('read in clustal alignment file'):
             position = ''
             #make a list w numbers for 1 through number of residues
             num_resi = list(range(1,int(af3t_df.iloc[-1,9])))
-    
+
+
+            grouped = af3t_df.groupby(af3t_df.iloc[:, 9].astype(int))
+            pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
+            resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
+            st.write(pLDDT_averages)
+            st.write(resn)
+            
+            '''
             for i in num_resi:
                 temp_list = []
                 for idx, row in af3t_df.iterrows():
@@ -182,6 +190,7 @@ if st.button('read in clustal alignment file'):
                 pLDDT_averages.append(avg)
             st.write(pLDDT_averages)
             st.write(resn)
+            '''
             data = {'Target Residue': resn,
                     'Target Position': num_resi,
                     'Target pLDDT': pLDDT_averages}
