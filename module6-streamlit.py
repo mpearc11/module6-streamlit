@@ -204,7 +204,7 @@ if st.button('read in clustal alignment file'):
             #st.write(df_combined)
                         
 #not sure how much of the below code i will use; will need to create a new column for delta pLDDT & do some math to fill it for specific positions; will want to print target positions that match ps positions and will use ps positions for the if statement indexing for where to create delta values
-            df_exploded = df_exploded.drop(index=df_exploded.index[0])
+            df_exploded = df_exploded.drop(index=0)
             st.write(df_exploded)
             for idx, aa in enumerate(df_exploded['Project Standard Seq']):
                 #st.write(aa)
