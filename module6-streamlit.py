@@ -122,10 +122,10 @@ if st.button('read in clustal alignment file'):
 			
 			
 			grouped = af3ps_df.groupby(af3ps_df.iloc[:, 9].astype(int))
-			pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
-			resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
-			st.write(pLDDT_averages)
-			st.write(resn)
+				pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
+				resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
+				st.write(pLDDT_averages)
+				st.write(resn)
         
             '''
             for i in num_resi:
