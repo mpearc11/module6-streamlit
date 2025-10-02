@@ -232,20 +232,20 @@ if st.button('read in clustal alignment file'):
             df_combined = df_combined.iloc[:-2]
             st.write(df_combined)
 
-            #create new column (evoscore) and fill cells
+            #calculate delta pLDDT for specific residue positions
             df_combined['Delta pLDDT'] = ''
             #st.write(df_combined)
             #st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
                 if i == 65 or 212 or 213:
-                    dpLDDT = float(df_combined[idx,psplddt]) - float(df_combined[idx,tplddt])
-                    df_combined.iloc[idx,delta] = dpLDDT
+                    dpLDDT = float(df_combined[idx,7]) - float(df_combined[idx,4])
+                    df_combined.iloc[idx,8] = dpLDDT
             st.write(df_combined)
             st.write(df_combined.dtypes)
-            df_combined['EvoScore'] = df_combined['EvoScore'].astype(float)
+            #df_combined['EvoScore'] = df_combined['EvoScore'].astype(float)
             #st.write(df_combined.dtypes)
-            evoscore = df_combined['EvoScore'].sum()
-            st.write('EvoScore = ' + str(evoscore))
+            #evoscore = df_combined['EvoScore'].sum()
+            #st.write('EvoScore = ' + str(evoscore))
             
             df_combined['Weighted EvoScore'] = ''
             for idx, i in enumerate(df_combined['COLOR']):
