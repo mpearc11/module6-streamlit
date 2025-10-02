@@ -119,21 +119,50 @@ if st.button('read in clustal alignment file'):
             position = ''
             #make a list w numbers for 1 through number of residues
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
-    
+
+
+            # Preextract columns for faster access
+            num_resi_set = set(num_resi)  # Convert to set for faster lookup
+            pos_col = af3ps_df.iloc[:, 9].values
+            resn_col = af3ps_df.iloc[:, 6].values
+            value_col = af3ps_df.iloc[:, 15].values
+            
+            # Initialize lists for results
+            pLDDT_averages = []
+            resn = []
+            
+            # Iterate over unique num_resi values
+            for i in num_resi_set:
+                # Mask for rows where the condition holds
+                mask = pos_col == i
+                
+                # Extract the filtered values
+                filtered_values = value_col[mask]
+                temp_list = filtered_values.tolist()  # Convert to list if necessary
+            
+                # Calculate the average of filtered values
+                avg = np.mean(temp_list)
+                pLDDT_averages.append(avg)
+                
+                # Find the corresponding resn values
+                filtered_resn = resn_col[mask]
+                
+                # Detect changes in the position (equivalent to your if condition)
+                pos_changes = np.diff(pos_col[mask]) != 0
+                resn.append(filtered_resn[pos_changes].tolist())  # Only append those positions where the value changes
+            
+            '''
             for i in num_resi:
                 temp_list = []
                 for idx, row in af3ps_df.iterrows():
                     if int(af3ps_df.iloc[idx,9]) == i:
-                        #st.write(idx)
-                        #st.write(af3ps_df.iloc[idx,15])
                         temp_list.append(float(af3ps_df.iloc[idx,15]))
-                        #st.write(temp_list)
                         pos_temp = af3ps_df.iloc[idx,9]
-                        #st.write(af3ps_df.iloc[idx,6])
                         if pos_temp != af3ps_df.iloc[idx-1,9]:
                             resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
                 pLDDT_averages.append(avg)
+                '''
             st.write(pLDDT_averages)
             st.write(resn)
             data = {'Project Standard Residue': resn,
@@ -150,6 +179,7 @@ if st.button('read in clustal alignment file'):
                     pLDDT_line = re.sub(r'\s+', ' ', line)
                     pLDDT_target += [pLDDT_line]
             #st.write(pLDDT_target)
+            
             #turn list from parsed cif file into dataframe
             af3t_df = pd.DataFrame(pLDDT_target, columns=['atom'])
             st.write(af3t_df)
@@ -169,12 +199,8 @@ if st.button('read in clustal alignment file'):
                 temp_list = []
                 for idx, row in af3t_df.iterrows():
                     if int(af3t_df.iloc[idx,9]) == i:
-                        #st.write(idx)
-                        #st.write(af3t_df.iloc[idx,15])
                         temp_list.append(float(af3t_df.iloc[idx,15]))
-                        #st.write(temp_list)
                         pos_temp = af3t_df.iloc[idx,9]
-                        #st.write(af3t_df.iloc[idx,6])
                         if pos_temp != af3t_df.iloc[idx-1,9]:
                             resn.append(af3t_df.iloc[idx,6])
                 avg = np.mean(temp_list)
@@ -194,6 +220,8 @@ if st.button('read in clustal alignment file'):
             #st.write(df_combined)
                         
 #not sure how much of the below code i will use; will need to create a new column for delta pLDDT & do some math to fill it for specific positions; will want to print target positions that match ps positions and will use ps positions for the if statement indexing for where to create delta values
+            df_exploded = df_exploded.drop(index=df_exploded.index[0])
+            st.write(df_exploded)
             for idx, aa in enumerate(df_exploded['Project Standard Seq']):
                 #st.write(aa)
                 if aa == '-':
