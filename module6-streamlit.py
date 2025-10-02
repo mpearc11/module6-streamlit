@@ -248,29 +248,10 @@ if st.button('read in clustal alignment file'):
             st.write(df_combined.dtypes)
             foldscore = df_combined['Delta pLDDT'].sum()
             st.write('FoldScore = ' + str(foldscore))
+            st.write('list of critical target residues')
             for idx, i in enumerate(target_resi_list):
-                st.write(i + target_position_list[idx])
-            
-            df_combined['Weighted EvoScore'] = ''
-            for idx, i in enumerate(df_combined['COLOR']):
-                if i < 4:
-                    df_combined.iloc[idx,6] = 0
-                if i >= 4:
-                    if df_combined.iloc[idx,2] == '*':
-                        df_combined.iloc[idx,6] = 0
-                    if df_combined.iloc[idx,2] == ':':
-                        df_combined.iloc[idx,6] = i*0.5
-                    if df_combined.iloc[idx,2] == '.':
-                        df_combined.iloc[idx,6] = i*0.75
-                    if df_combined.iloc[idx,2] == ' ':
-                        df_combined.iloc[idx,6] = i
-            st.write(df_combined)
-            st.write(df_combined[['Project Standard Seq', 'Target Seq', 'EvoScore', 'Weighted EvoScore']])
-            weighted_evoscore = df_combined['Weighted EvoScore'].sum()
-            st.write('Weighted EvoScore = ' + str(weighted_evoscore))
+                st.write(str(i) + str(target_position_list[idx]))
 
-                
-            
     frag()
 
 
