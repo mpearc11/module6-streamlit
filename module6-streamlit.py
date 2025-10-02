@@ -121,38 +121,6 @@ if st.button('read in clustal alignment file'):
             num_resi = list(range(1,int(af3ps_df.iloc[-1,9])))
 
 
-           # Pre-extract the necessary columns for faster access
-            pos_col = af3ps_df.iloc[:, 9].values  # Position column (9th column)
-            resn_col = af3ps_df.iloc[:, 6].values  # Residue name column (6th column)
-            value_col = af3ps_df.iloc[:, 15].values  # pLDDT value column (15th column)
-            
-            # Initialize lists for results
-            pLDDT_averages = []
-            resn = []
-            
-            # Iterate over each unique `num_resi`
-            for i in num_resi:
-                temp_list = []
-                
-                # Iterate over DataFrame rows (similar to original structure)
-                for idx, row in af3ps_df.iterrows():
-                    # Check if the position matches the current `i`
-                    if pos_col[idx] == i:
-                        temp_list.append(value_col[idx])  # Append the pLDDT value
-                        
-                        # Track changes in position (we compare the current and previous row)
-                        if idx > 0 and pos_col[idx] != pos_col[idx - 1]:
-                            resn.append(resn_col[idx])  # Append residue name when position changes
-            
-                # Compute the average of pLDDT values for this residue
-                avg = np.mean(temp_list)
-                pLDDT_averages.append(avg)
-            
-                # Append the first residue name (for the initial residue matching the `i` value)
-                if temp_list:
-                    resn.append(resn_col[temp_list.index(value_col[0])])
-
-            '''
             for i in num_resi:
                 temp_list = []
                 for idx, row in af3ps_df.iterrows():
@@ -163,7 +131,6 @@ if st.button('read in clustal alignment file'):
                             resn.append(af3ps_df.iloc[idx,6])
                 avg = np.mean(temp_list)
                 pLDDT_averages.append(avg)
-                '''
             st.write(pLDDT_averages)
             st.write(resn)
             data = {'Project Standard Residue': resn,
