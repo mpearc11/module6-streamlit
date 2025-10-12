@@ -43,11 +43,11 @@ else:
 #bytes = psa_file.getvalue() ##adds 'b in front of file & other character issues (adds /n etc)
 #st.write(bytes)
 try:
-    temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+    #temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+    temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
 except AttributeError:
     pass
-#st.text(temp)
-temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
+st.text(temp)
 
 
 #declaring variables outside of button if statement so i can access them after the button step
