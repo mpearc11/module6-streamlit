@@ -84,7 +84,7 @@ if st.button('read in clustal alignment file'):
     
     #convert clustal alignment to individual sequence strings
 
-    for idx,i in alignment:
+    for idx,i in enumerate(alignment):
         if 'P22259' in str(i.id):
             seq1 = str(alignment[idx].seq) #ps
         else:
