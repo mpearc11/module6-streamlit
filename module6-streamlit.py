@@ -74,8 +74,8 @@ if st.button('read in clustal alignment file'):
     #st.text(ps_line)
     #st.text(target_line)
     '''
-    alignment = AlignIO.read(temp, 'clustal')
-    #alignment = AlignIO.read(StringIO(temp), "clustal")
+    #alignment = AlignIO.read(temp, 'clustal')
+    alignment = AlignIO.read(StringIO(temp), "clustal")
     #alignment = AlignIO.read('ctei_clustal.aln', 'clustal')
     st.write(alignment)
     
