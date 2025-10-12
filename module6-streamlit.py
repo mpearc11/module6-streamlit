@@ -14,17 +14,15 @@ import re
 
 st.title('FoldScore Calculation')
 
-#st.header('Submit Clustal Alignment')
-st.header('Submit FASTA Alignment')
-
+st.header('Submit Clustal Alignment')
 
 #code to upload clustal file & turn into dataframe
 
-psa_file = st.file_uploader("",type='fasta', key=1) #was 'clustal_num'
+psa_file = st.file_uploader("",type='clustal_num', key=1)
 if psa_file is not None:
     st.success("PSA file uploaded")
 else:
-    st.info("please upload your .fasta file") #.clustal_num file
+    st.info("please upload your .clustal_num file")
 
 st.header('Submit Project Standard AlphaFold3 cif File')
 
@@ -48,7 +46,7 @@ try:
     temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
 except AttributeError:
     pass
-st.text(temp)
+#st.text(temp)
 
 #declaring variables outside of button if statement so i can access them after the button step
 df = ''
@@ -57,6 +55,7 @@ df2 = ''
 df_exploded = ''
 
 if st.button('read in clustal alignment file'):
+    '''
     ps_line = ""
     target_line = ""
     temp_split = temp.splitlines()
@@ -74,6 +73,19 @@ if st.button('read in clustal alignment file'):
     target_line = "".join(char for char in target_line if not char.isdigit())
     #st.text(ps_line)
     #st.text(target_line)
+    '''
+    alignment = AlignIO.read(temp, 'clustal')
+    #alignment = AlignIO.read(StringIO(temp), "clustal")
+    #alignment = AlignIO.read('ctei_clustal.aln', 'clustal')
+    st.write(alignment)
+    
+    #convert clustal alignment to individual sequence strings
+    
+    seq1 = str(alignment[0].seq)
+    seq2 = str(alignment[1].seq)
+    
+    st.write(seq1)
+    st.write(seq2)
     
     #convert strings to pandas dataframe
     
