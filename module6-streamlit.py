@@ -43,8 +43,8 @@ else:
 #bytes = psa_file.getvalue() ##adds 'b in front of file & other character issues (adds /n etc)
 #st.write(bytes)
 try:
-    #temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
-    temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
+    temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
+    #temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
 except AttributeError:
     pass
 st.text(temp)
@@ -76,8 +76,9 @@ if st.button('read in clustal alignment file'):
     #st.text(ps_line)
     #st.text(target_line)
     '''
-    alignment = AlignIO.read(temp, 'clustal')
-    #alignment = AlignIO.read(StringIO(temp), "clustal")
+    #alignment = AlignIO.read(temp, 'clustal')
+    st.write(StringIO(temp))
+    alignment = AlignIO.read(StringIO(temp), "clustal")
     #alignment = AlignIO.read('ctei_clustal.aln', 'clustal')
     st.write(alignment)
     
