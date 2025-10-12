@@ -47,6 +47,8 @@ try:
 except AttributeError:
     pass
 #st.text(temp)
+temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
+
 
 #declaring variables outside of button if statement so i can access them after the button step
 df = ''
