@@ -97,8 +97,8 @@ if st.button('read in clustal alignment file'):
     
     #data = {'Target Seq': [target_line],
      #           'Project Standard Seq': [ps_line]}
-    data = {'Target Seq': [seq1],
-                'Project Standard Seq': [ps_line]}
+    data = {'Target Seq': [seq2],
+                'Project Standard Seq': [seq1]}
     df = pd.DataFrame(data)
     #st.write(df)
     df1 = df['Target Seq'].str.split('').explode().reset_index(drop=True)
