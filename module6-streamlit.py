@@ -14,15 +14,17 @@ import re
 
 st.title('FoldScore Calculation')
 
-st.header('Submit Clustal Alignment')
-    
+#st.header('Submit Clustal Alignment')
+st.header('Submit FASTA Alignment')
+
+
 #code to upload clustal file & turn into dataframe
 
-psa_file = st.file_uploader("",type='clustal_num', key=1)
+psa_file = st.file_uploader("",type='fasta', key=1) #was 'clustal_num'
 if psa_file is not None:
     st.success("PSA file uploaded")
 else:
-    st.info("please upload your clustal .clustal file")
+    st.info("please upload your .fasta file") #.clustal_num file
 
 st.header('Submit Project Standard AlphaFold3 cif File')
 
@@ -46,7 +48,7 @@ try:
     temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
 except AttributeError:
     pass
-#st.text(temp)
+st.text(temp)
 
 #declaring variables outside of button if statement so i can access them after the button step
 df = ''
