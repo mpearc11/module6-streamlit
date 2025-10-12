@@ -44,7 +44,6 @@ else:
 #st.write(bytes)
 try:
     temp = psa_file.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
-    #temp = psa_file.read() ##adds 'b in front of file & other character issues (adds /n etc)
 except AttributeError:
     pass
 st.text(temp)
@@ -77,22 +76,26 @@ if st.button('read in clustal alignment file'):
     #st.text(target_line)
     '''
     #alignment = AlignIO.read(temp, 'clustal')
-    st.write(StringIO(temp))
     alignment = AlignIO.read(StringIO(temp), "clustal")
     #alignment = AlignIO.read('ctei_clustal.aln', 'clustal')
     st.write(alignment)
     
     #convert clustal alignment to individual sequence strings
-    
-    seq1 = str(alignment[0].seq)
-    seq2 = str(alignment[1].seq)
+
+    for i in alignment:
+        if P22259 in i:
+            seq1 = str(alignment[i].seq) #ps
+        else:
+            seq2 = str(alignment[i].seq) #target
     
     st.write(seq1)
     st.write(seq2)
     
     #convert strings to pandas dataframe
     
-    data = {'Target Seq': [target_line],
+    #data = {'Target Seq': [target_line],
+     #           'Project Standard Seq': [ps_line]}
+    data = {'Target Seq': [seq1],
                 'Project Standard Seq': [ps_line]}
     df = pd.DataFrame(data)
     #st.write(df)
