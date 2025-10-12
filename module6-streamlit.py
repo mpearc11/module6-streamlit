@@ -84,12 +84,11 @@ if st.button('read in clustal alignment file'):
     
     #convert clustal alignment to individual sequence strings
 
-    for i in alignment:
-        st.write(i.id)
+    for idx,i in alignment:
         if 'P22259' in str(i.id):
-            seq1 = str(alignment[i].seq) #ps
+            seq1 = str(alignment[idx].seq) #ps
         else:
-            seq2 = str(alignment[i].seq) #target
+            seq2 = str(alignment[idx].seq) #target
     
     st.write(seq1)
     st.write(seq2)
