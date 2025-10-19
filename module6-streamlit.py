@@ -18,7 +18,7 @@ st.header('Submit Clustal Alignment')
 
 #code to upload clustal file & turn into dataframe
 
-psa_file = st.file_uploader("",type='clustal_num', key=1)
+psa_file = st.file_uploader("",type='clustal_num','aln-clustal_num, key=1)
 if psa_file is not None:
     st.success("PSA file uploaded")
 else:
@@ -276,9 +276,3 @@ if st.button('read in clustal alignment file'):
 
     frag()
 
-
-#@st.fragment()
-#def PSA_download():
- #   with open('clustalPSA.aln') as f:
-  #      st.download_button('download PSA', f)
-#PSA_download()
