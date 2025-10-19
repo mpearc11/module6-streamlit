@@ -59,7 +59,7 @@ if st.button('read in clustal alignment file'):
   
     alignment = AlignIO.read(StringIO(temp), "clustal")
     #st.write(alignment)
-    for record in alignment:
+    #for record in alignment:
         #st.write(record.id)
     
     #convert clustal alignment to individual sequence strings
