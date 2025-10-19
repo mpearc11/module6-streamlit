@@ -253,7 +253,7 @@ if st.button('read in clustal alignment file'):
                 st.write(str(i) + str(target_position_list[idx]))
             st.write('FoldScore = ' + str(foldscore))
             st.write(df_combined)
-            st.write(df_combined.iloc[7].sum())
+            st.write(df_combined.iloc[7].mean())
 
 
     frag()
