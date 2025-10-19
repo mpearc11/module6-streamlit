@@ -56,31 +56,11 @@ df2 = ''
 df_exploded = ''
 
 if st.button('read in clustal alignment file'):
-    '''
-    ps_line = ""
-    target_line = ""
-    temp_split = temp.splitlines()
-    # Process the captured Clustal output text line by line
-    for line in temp_split[1:]:
-        # The conservation line is identifiable by its spacing
-        if 'P22259' in line:
-            seq = line[26:86]
-            ps_line += seq
-        if line[:1].isalpha():
-            if 'P22259' not in line:
-                seq = line[26:86]
-                target_line += seq
-    ps_line = "".join(char for char in ps_line if not char.isdigit())
-    target_line = "".join(char for char in target_line if not char.isdigit())
-    #st.text(ps_line)
-    #st.text(target_line)
-    '''
-    #alignment = AlignIO.read(temp, 'clustal')
+  
     alignment = AlignIO.read(StringIO(temp), "clustal")
-    #alignment = AlignIO.read('ctei_clustal.aln', 'clustal')
-    st.write(alignment)
+    #st.write(alignment)
     for record in alignment:
-        st.write(record.id)
+        #st.write(record.id)
     
     #convert clustal alignment to individual sequence strings
 
@@ -90,8 +70,8 @@ if st.button('read in clustal alignment file'):
         else:
             seq2 = str(alignment[idx].seq) #target
     
-    st.write(seq1)
-    st.write(seq2)
+    #st.write(seq1)
+    #st.write(seq2)
     
     #convert strings to pandas dataframe
     
@@ -145,28 +125,28 @@ if st.button('read in clustal alignment file'):
             grouped = af3ps_df.groupby(af3ps_df.iloc[:, 9].astype(int))
             pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
             resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
-            st.write(pLDDT_averages)
-            st.write(resn)
+            #st.write(pLDDT_averages)
+            #st.write(resn)
         
-            '''
-            for i in num_resi:
-                temp_list = []
-                for idx, row in af3ps_df.iterrows():
-                    if int(af3ps_df.iloc[idx,9]) == i:
-                        temp_list.append(float(af3ps_df.iloc[idx,15]))
-                        pos_temp = af3ps_df.iloc[idx,9]
-                        if pos_temp != af3ps_df.iloc[idx-1,9]:
-                            resn.append(af3ps_df.iloc[idx,6])
-                avg = np.mean(temp_list)
-                pLDDT_averages.append(avg)
-            st.write(pLDDT_averages)
-            st.write(resn)
-            '''
+            ## below block is my original code for doing what the grouped block above does faster
+            #for i in num_resi:
+             #   temp_list = []
+              #  for idx, row in af3ps_df.iterrows():
+               #     if int(af3ps_df.iloc[idx,9]) == i:
+                #        temp_list.append(float(af3ps_df.iloc[idx,15]))
+                 #       pos_temp = af3ps_df.iloc[idx,9]
+                  #      if pos_temp != af3ps_df.iloc[idx-1,9]:
+                   #         resn.append(af3ps_df.iloc[idx,6])
+                #avg = np.mean(temp_list)
+                #pLDDT_averages.append(avg)
+            #st.write(pLDDT_averages)
+            #st.write(resn)
+            
             data = {'Project Standard Residue': resn,
                     'Project Standard Position': num_resi,
                     'Project Standard pLDDT': pLDDT_averages}
             psresidue_df = pd.DataFrame(data)
-            st.write(psresidue_df)
+            #st.write(psresidue_df)
                     
             #target cif parsing
             temp = af3_target.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
@@ -196,23 +176,23 @@ if st.button('read in clustal alignment file'):
             grouped = af3t_df.groupby(af3t_df.iloc[:, 9].astype(int))
             pLDDT_averages = [grouped.get_group(i).iloc[:, 15].astype(float).mean() for i in num_resi]
             resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
-            st.write(pLDDT_averages)
-            st.write(resn)
+            #st.write(pLDDT_averages)
+            #st.write(resn)
             
-            '''
-            for i in num_resi:
-                temp_list = []
-                for idx, row in af3t_df.iterrows():
-                    if int(af3t_df.iloc[idx,9]) == i:
-                        temp_list.append(float(af3t_df.iloc[idx,15]))
-                        pos_temp = af3t_df.iloc[idx,9]
-                        if pos_temp != af3t_df.iloc[idx-1,9]:
-                            resn.append(af3t_df.iloc[idx,6])
-                avg = np.mean(temp_list)
-                pLDDT_averages.append(avg)
-            st.write(pLDDT_averages)
-            st.write(resn)
-            '''
+            ## below is my original code for what the grouped section above does faster
+            #for i in num_resi:
+             #   temp_list = []
+              #  for idx, row in af3t_df.iterrows():
+               #     if int(af3t_df.iloc[idx,9]) == i:
+                #        temp_list.append(float(af3t_df.iloc[idx,15]))
+                 #       pos_temp = af3t_df.iloc[idx,9]
+                  #      if pos_temp != af3t_df.iloc[idx-1,9]:
+                   #         resn.append(af3t_df.iloc[idx,6])
+                #avg = np.mean(temp_list)
+                #pLDDT_averages.append(avg)
+            #st.write(pLDDT_averages)
+            #st.write(resn)
+            
             data = {'Target Residue': resn,
                     'Target Position': num_resi,
                     'Target pLDDT': pLDDT_averages}
@@ -250,7 +230,7 @@ if st.button('read in clustal alignment file'):
             #st.write(consurf_df)
             df_combined = pd.concat([df_exploded, tresidue_df, psresidue_df], axis=1)
             df_combined = df_combined.iloc[:-2]
-            st.write(df_combined)
+            #st.write(df_combined)
 
             #calculate delta pLDDT for specific residue positions
             df_combined['Delta pLDDT'] = 0
@@ -265,14 +245,14 @@ if st.button('read in clustal alignment file'):
                     target_resi_list.append(df_combined.iloc[idx,2])
                     target_position_list.append(df_combined.iloc[idx,3])
             st.write(df_combined)
-            st.write(df_combined.dtypes)
+            #st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
-            st.write(df_combined.dtypes)
+            #st.write(df_combined.dtypes)
             foldscore = df_combined['Delta pLDDT'].sum()
-            st.write('FoldScore = ' + str(foldscore))
-            st.write('list of critical target residues')
+            st.write('List of Critical Target Residues')
             for idx, i in enumerate(target_resi_list):
                 st.write(str(i) + str(target_position_list[idx]))
+            st.write('FoldScore = ' + str(foldscore))
 
     frag()
 
