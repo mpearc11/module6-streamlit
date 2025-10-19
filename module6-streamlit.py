@@ -246,14 +246,13 @@ if st.button('read in clustal alignment file'):
                     target_position_list.append(df_combined.iloc[idx,3])
             #st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
-            st.write(df_combined.dtypes)
+            #st.write(df_combined.dtypes)
             foldscore = df_combined['Delta pLDDT'].sum()
             st.write('List of Critical Target Residues')
             for idx, i in enumerate(target_resi_list):
                 st.write(str(i) + str(target_position_list[idx]))
             st.write('FoldScore = ' + str(foldscore))
             st.write(df_combined)
-            st.write(df_combined['Project Standard pLDDT'].mean())
 
 
     frag()
