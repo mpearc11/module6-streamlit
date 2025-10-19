@@ -197,7 +197,7 @@ if st.button('read in clustal alignment file'):
                     'Target Position': num_resi,
                     'Target pLDDT': pLDDT_averages}
             tresidue_df = pd.DataFrame(data)
-            st.write(tresidue_df)
+            #st.write(tresidue_df)
                                     
             #af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
             #st.write(af3_df)
@@ -244,7 +244,6 @@ if st.button('read in clustal alignment file'):
                     df_combined.iloc[idx,8] = dpLDDT
                     target_resi_list.append(df_combined.iloc[idx,2])
                     target_position_list.append(df_combined.iloc[idx,3])
-            st.write(df_combined)
             #st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
             #st.write(df_combined.dtypes)
@@ -253,6 +252,8 @@ if st.button('read in clustal alignment file'):
             for idx, i in enumerate(target_resi_list):
                 st.write(str(i) + str(target_position_list[idx]))
             st.write('FoldScore = ' + str(foldscore))
+            st.write(df_combined)
+
 
     frag()
 
