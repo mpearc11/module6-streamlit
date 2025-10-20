@@ -251,7 +251,7 @@ if st.button('read in clustal alignment file'):
             st.write('List of Critical Target Residues')
             for idx, i in enumerate(target_resi_list):
                 st.write(str(i) + str(target_position_list[idx]))
-            st.write('FoldScore = ' + str({foldscore:.3f}))
+            st.write(f'FoldScore = {foldscore:.3f}')
             st.write(df_combined)
 
 
