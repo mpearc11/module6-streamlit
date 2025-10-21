@@ -147,8 +147,9 @@ if st.button('read in clustal alignment file'):
                     'Project Standard pLDDT': pLDDT_averages}
             psresidue_df = pd.DataFrame(data)
             #st.write(psresidue_df)
-            st.write('Project Standard Total pLDDT = ' + str(psresidue_df['Project Standard pLDDT'].mean()))
-                    
+            ps_total_plddt = psresidue_df['Project Standard pLDDT'].mean()
+            st.write(f'Project Standard Total pLDDT = {ps_total_plddt:.1f}')
+
             #target cif parsing
             temp = af3_target.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
             temp_split = temp.splitlines()
@@ -179,7 +180,6 @@ if st.button('read in clustal alignment file'):
             resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
             #st.write(pLDDT_averages)
             #st.write(resn)
-            st.write('Target Total pLDDT = ' + str(pLDDT_averages.mean()))
 
             
             ## below is my original code for what the grouped section above does faster
@@ -201,6 +201,9 @@ if st.button('read in clustal alignment file'):
                     'Target pLDDT': pLDDT_averages}
             tresidue_df = pd.DataFrame(data)
             #st.write(tresidue_df)
+            target_total_plddt = tresidue_df['Target pLDDT'].mean()
+            st.write(f'Target Total pLDDT = {target_total_plddt:.1f}')
+
                                     
             #af3_df = pd.concat([psresidue_df, tresidue_df], axis=1)
             #st.write(af3_df)
