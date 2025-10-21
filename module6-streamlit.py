@@ -236,14 +236,15 @@ if st.button('read in clustal alignment file'):
             df_combined['Delta pLDDT'] = 0
             target_resi_list = []
             target_position_list = []
-            #st.write(df_combined)
-            #st.write(df_combined.dtypes)
+            st.write(df_combined)
+            st.write(df_combined.dtypes)
             for idx,i in enumerate(df_combined['Project Standard Position']):
                 if i in (65,212,213,232,250,254,269,333):
                     dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
                     df_combined.iloc[idx,8] = dpLDDT
-                    target_resi_list.append(df_combined.iloc[idx,2])
                     target_position_list.append(df_combined.iloc[idx,3])
+                    target_resi_list.append(df_combined.iloc[idx,2]) ##will need to change index once single letter code is added
+
             #st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
             #st.write(df_combined.dtypes)
@@ -251,7 +252,7 @@ if st.button('read in clustal alignment file'):
             st.write('List of Critical Target Residues')
             for idx, i in enumerate(target_resi_list):
                 st.write(str(i) + str(target_position_list[idx]))
-            st.write(f'FoldScore = {foldscore:.3f}')
+            st.write(f'FoldScore = {foldscore:.1f}')
             st.write(df_combined)
 
 
