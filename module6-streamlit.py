@@ -243,7 +243,7 @@ if st.button('read in clustal alignment file'):
                     dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
                     df_combined.iloc[idx,8] = dpLDDT
                     target_position_list.append(df_combined.iloc[idx,3])
-                    target_resi_list.append(df_combined.iloc[idx,2]) ##will need to change index once single letter code is added
+                    target_resi_list.append(df_combined.iloc[idx,0])
 
             #st.write(df_combined.dtypes)
             df_combined['Delta pLDDT'] = df_combined['Delta pLDDT'].astype(float)
