@@ -89,7 +89,7 @@ if st.button('read in clustal alignment file'):
     #st.write(df_exploded)
     #df_exploded['color'] = 0
     df_exploded = df_exploded.iloc[1:].reset_index(drop=True) #moving this to after the conservation symbols are added
-    #st.write(df_exploded)
+    st.write(df_exploded)
 
     #process AF3 cif files into a table
 
