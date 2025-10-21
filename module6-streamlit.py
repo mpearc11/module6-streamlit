@@ -141,6 +141,7 @@ if st.button('read in clustal alignment file'):
                 #pLDDT_averages.append(avg)
             #st.write(pLDDT_averages)
             #st.write(resn)
+            st.write('Project Standard Total pLDDT = ' + str(pLDDT_averages.mean()))
             
             data = {'Project Standard Residue': resn,
                     'Project Standard Position': num_resi,
@@ -178,6 +179,8 @@ if st.button('read in clustal alignment file'):
             resn = [grouped.get_group(i).iloc[0, 6] for i in num_resi]
             #st.write(pLDDT_averages)
             #st.write(resn)
+            st.write('Target Total pLDDT = ' + str(pLDDT_averages.mean()))
+
             
             ## below is my original code for what the grouped section above does faster
             #for i in num_resi:
