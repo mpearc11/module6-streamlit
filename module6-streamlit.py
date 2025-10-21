@@ -141,13 +141,13 @@ if st.button('read in clustal alignment file'):
                 #pLDDT_averages.append(avg)
             #st.write(pLDDT_averages)
             #st.write(resn)
-            st.write('Project Standard Total pLDDT = ' + str(pLDDT_averages.mean()))
             
             data = {'Project Standard Residue': resn,
                     'Project Standard Position': num_resi,
                     'Project Standard pLDDT': pLDDT_averages}
             psresidue_df = pd.DataFrame(data)
             #st.write(psresidue_df)
+            st.write('Project Standard Total pLDDT = ' + str(psresidue_df['Project Standard pLDDT'].mean()))
                     
             #target cif parsing
             temp = af3_target.getvalue().decode("utf-8") ##decodes characters correctly but still has too long file name issue
