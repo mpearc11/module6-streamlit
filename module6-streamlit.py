@@ -18,7 +18,7 @@ st.header('Submit Clustal Alignment')
 
 #code to upload clustal file & turn into dataframe
 
-psa_file = st.file_uploader("",type='aln-clustal_num', key=1)
+psa_file = st.file_uploader("",type=None, key=1)
 if psa_file is not None:
     st.success("PSA file uploaded")
 else:
