@@ -245,7 +245,7 @@ def frag():
         #st.write(df_combined)
         #st.write(df_combined.dtypes)
         for idx,i in enumerate(df_combined['Project Standard Position']):
-            if i in (65,212,213,232,250,254,269,333):
+            if i in (66,213,214,233,251,255,270,334):
                 dpLDDT = float(df_combined.iloc[idx,7]) - float(df_combined.iloc[idx,4])
                 df_combined.iloc[idx,8] = dpLDDT
                 target_position_list.append(df_combined.iloc[idx,3])
