@@ -56,11 +56,14 @@ df2 = ''
 df_exploded = ''
 
 #if st.button('read in clustal alignment file'):
-  
-alignment = AlignIO.read(StringIO(temp), "clustal")
-#st.write(alignment)
-#for record in alignment:
-    #st.write(record.id)
+
+try:
+    alignment = AlignIO.read(StringIO(temp), "clustal")
+    #st.write(alignment)
+    #for record in alignment:
+        #st.write(record.id)
+except NameError:
+    pass
 
 #convert clustal alignment to individual sequence strings
 
